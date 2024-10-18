@@ -22,17 +22,19 @@ import com.example.prm392project.api.ApiService;
 import com.example.prm392project.databinding.LoginBinding;
 import com.example.prm392project.model.LoginRequest;
 import com.example.prm392project.model.LoginResponse;
+import com.example.prm392project.presenter.LoginPresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
     private TextView changeRegister;
     private LoginBinding binding;
+    private LoginPresenter presenter;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(R.layout.login);
+
+        presenter = new LoginPresenter(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -67,35 +71,38 @@ public class LoginActivity extends AppCompatActivity {
                     String password = passwordEditText.getText().toString();
 
                     LoginRequest loginRequest = new LoginRequest(email, password);
-                    login(loginRequest);
+                    presenter.login(loginRequest);
                 }
             }
         });
     }
-
-    public void login(LoginRequest loginRequest) {
-        // Call API
-        Call<LoginResponse> loginResponseCall = ApiService.getUserService().login(loginRequest);
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
-                    Log.d("LoginActivity", "onResponse login success: " + response.isSuccessful() + " " + response.message());
-
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-                    Log.d("LoginActivity", "onResponse login failed: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-                Log.d("LoginActivity", "onFailure: " + t.getMessage());
-            }
-        });
-
+    @Override
+    public void showLoading() {
+        // Hiển thị trạng thái đang tải
+        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void hideLoading() {
+        // Ẩn trạng thái đang tải
+    }
+
+    @Override
+    public void onLoginSuccess(String token) {
+        // Xử lý khi đăng nhập thành công
+        Toast.makeText(this, "Login Success: " + token, Toast.LENGTH_SHORT).show();
+        Log.e("onLoginSuccess", "Login success" );
+        // Chuyển sang màn hình chính hoặc lưu token
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onLoginFailure(String message) {
+        // Xử lý khi đăng nhập thất bại
+        Toast.makeText(this, "Login Failed: " + message, Toast.LENGTH_SHORT).show();
+        Log.e("onLoginFailure", "Login failed" );
+    }
+
 }

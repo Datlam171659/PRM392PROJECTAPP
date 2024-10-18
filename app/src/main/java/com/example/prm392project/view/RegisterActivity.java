@@ -21,16 +21,19 @@ import com.example.prm392project.api.ApiService;
 import com.example.prm392project.databinding.SigninBinding;
 import com.example.prm392project.model.RegisterRequest;
 import com.example.prm392project.model.RegisterResponse;
+import com.example.prm392project.presenter.RegisterPresenter;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterView {
     EditText userNameEditText, fullNameEditText, emailEditText, passwordEditText;
     Button registerButton;
     TextView changeLogin;
 
     private SigninBinding binding;
+    private RegisterPresenter presenter;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +41,14 @@ public class RegisterActivity extends AppCompatActivity {
         binding = SigninBinding.inflate(getLayoutInflater());
         setContentView(R.layout.signin);
 
+        presenter = new RegisterPresenter((RegisterView) this);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signin), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
 
         userNameEditText = findViewById(R.id.userNameEditText);
         fullNameEditText = findViewById(R.id.fullNameEditText);
@@ -59,51 +65,55 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(userNameEditText.getText().toString()) || TextUtils.isEmpty(fullNameEditText.getText().toString()) || TextUtils.isEmpty(emailEditText.getText().toString()) || TextUtils.isEmpty(passwordEditText.getText().toString())) {
-                    Toast.makeText(RegisterActivity.this, "Required", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    String userName = userNameEditText.getText().toString();
-                    String fullName = fullNameEditText.getText().toString();
-                    String email = emailEditText.getText().toString();
-                    String password = passwordEditText.getText().toString();
+                // Kiểm tra dữ liệu người dùng nhập
+                if (TextUtils.isEmpty(userNameEditText.getText().toString()) ||
+                        TextUtils.isEmpty(fullNameEditText.getText().toString()) ||
+                        TextUtils.isEmpty(emailEditText.getText().toString()) ||
+                        TextUtils.isEmpty(passwordEditText.getText().toString())) {
 
-                    RegisterRequest registerRequest = new RegisterRequest(userName, fullName, email, password);
-                    register(registerRequest);
+                    Toast.makeText(RegisterActivity.this, "required", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                // Tạo đối tượng RegisterRequest
+                String userName = userNameEditText.getText().toString();
+                String name = fullNameEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                RegisterRequest registerRequest = new RegisterRequest(userName, name, email, password);
+
+                // Gọi presenter để xử lý đăng ký
+                presenter.register(registerRequest);
             }
         });
     }
 
-    public void register(RegisterRequest registerRequest) {
+    @Override
+    public void showLoading() {
+        // Hiển thị trạng thái đang tải
+        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
+    }
 
-        Call<RegisterResponse> registerResponseCall = ApiService.getUserService().register(registerRequest);
-        registerResponseCall.enqueue(new retrofit2.Callback<RegisterResponse>() {
-            @Override
-            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                if (response.isSuccessful()) {
+    @Override
+    public void hideLoading() {
+        // Ẩn trạng thái đang tải
+    }
 
-                    Toast.makeText(RegisterActivity.this, "Register success", Toast.LENGTH_SHORT).show();
-                    Log.e("Register", "onResponse: " + response.isSuccessful());
+    @Override
+    public void onRegisterSuccess(String message) {
+        // Xử lý khi đăng ký thành công
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Log.e("Register", "onResponse: " + message);
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        finish();
+    }
 
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    finish();
-
-                } else {
-
-                    Toast.makeText(RegisterActivity.this, "Register fail", Toast.LENGTH_SHORT).show();
-                    Log.e("Register", "onResponse fail: " + response.isSuccessful());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                // show error
-                Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("Register", "onFailure: " + t.getLocalizedMessage());
-
-            }
-        });
+    @Override
+    public void onRegisterFailure(String message) {
+        // Xử lý khi đăng ký thất bại
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Log.e("Register", "onFailure: " + message);
     }
 
 }
