@@ -7,15 +7,17 @@ public class LoginResponse {
     private String email;
     private String id;
     private String token;
+    private boolean isSuccess;
     private String message;
 
-    public LoginResponse(String username, String password, String fullName, String email, String id, String token, String message) {
+    public LoginResponse(String username, String password, String fullName, String email, String id, String token, boolean isSuccess, String message) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.email = email;
         this.id = id;
         this.token = token;
+        this.isSuccess = isSuccess;
         this.message = message;
     }
 
@@ -63,7 +65,23 @@ public class LoginResponse {
         return token;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
