@@ -8,7 +8,8 @@
     android:padding="16dp"
     android:gravity="center"
     android:background="#F9F9F9"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:id="@+id/signup">
 
     <!-- App logo or icon -->
     <ImageView
@@ -41,13 +42,24 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"/>
 
+    <!-- Username EditText -->
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên đăng nhập"
+        android:inputType="text"
+        android:textColorHint="#FF8800"
+        android:backgroundTint="#FF8800"
+        android:layout_marginTop="24dp"/>
+
     <!-- Email/Phone EditText -->
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Họ và tên"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textColorHint="#FF8800"
         android:backgroundTint="#FF8800"
         android:layout_marginTop="24dp"/>
@@ -58,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         android:textColorHint="#FF8800"
         android:backgroundTint="#FF8800"
         android:layout_marginTop="16dp"/>
