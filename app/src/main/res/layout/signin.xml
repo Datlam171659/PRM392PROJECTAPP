@@ -9,7 +9,7 @@
     android:gravity="center"
     android:background="#F9F9F9"
     tools:ignore="ExtraText"
-    android:id="@+id/signup">
+    android:id="@+id/signin">
 
     <!-- App logo or icon -->
     <ImageView
@@ -55,7 +55,7 @@
 
     <!-- Email/Phone EditText -->
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/fullNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Họ và tên"
@@ -106,10 +106,10 @@
         >
 
         <TextView
-            android:id="@+id/changeRegisterMethodText"
+            android:id="@+id/changeLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đổi phương thức đăng ký"
+            android:text="Đăng nhập"
             android:textColor="#8C8C8C"
             android:textSize="14sp"
             android:paddingRight="120dp"/>

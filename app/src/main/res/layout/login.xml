@@ -87,7 +87,7 @@
         >
 
         <TextView
-            android:id="@+id/changeRegisterMethodText"
+            android:id="@+id/changeRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đổi phương thức đăng ký"
