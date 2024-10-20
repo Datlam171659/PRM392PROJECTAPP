@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         String userId = String.valueOf(loginResponse.getResult().getId());
         Log.e("USER_ID", userId);
         Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
-        intent.putExtra("USER_ID", userId);
+        intent.putExtra("userId", userId);
         startActivity(intent);
         finish();
     }
