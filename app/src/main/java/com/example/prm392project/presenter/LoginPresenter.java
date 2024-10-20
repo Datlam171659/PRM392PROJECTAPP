@@ -1,5 +1,7 @@
 package com.example.prm392project.presenter;
 
+import android.util.Log;
+
 import com.example.prm392project.api.ApiService;
 import com.example.prm392project.model.LoginRequest;
 import com.example.prm392project.model.LoginResponse;
@@ -27,7 +29,18 @@ public class LoginPresenter {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 view.hideLoading();
                 if (response.isSuccessful() && response.body().getToken() != null) {
-                    view.onLoginSuccess(response.body().getToken());
+                    LoginResponse loginResponse = response.body();
+
+                    // Lấy token
+                     String token = loginResponse.getToken();
+
+                    // Lấy id từ đối tượng result
+                    String id = loginResponse.getResult().getId();
+
+                    // Hiển thị hoặc sử dụng id và token
+                    Log.d("Login", "ID: " + id);
+
+                    view.onLoginSuccess(token);
                 } else {
                     view.onLoginFailure("Login failed");
                 }

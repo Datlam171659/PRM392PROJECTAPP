@@ -17,17 +17,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.prm392project.HealthDashboardActivity;
-import com.example.prm392project.MainActivity;
 import com.example.prm392project.R;
-import com.example.prm392project.api.ApiService;
 import com.example.prm392project.databinding.LoginBinding;
 import com.example.prm392project.model.LoginRequest;
-import com.example.prm392project.model.LoginResponse;
 import com.example.prm392project.presenter.LoginPresenter;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText emailEditText;
