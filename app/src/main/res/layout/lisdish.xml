@@ -5,18 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:id="@+id/listmenu"
     tools:context=".MainActivity">
 
     <!-- Header Section with Avatar, Notification, and Search bar -->
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/logoaccount"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:layout_marginRight="15dp"
+        >
 
         <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_avatar" />
 
@@ -24,60 +29,277 @@
             android:id="@+id/imgNotification"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_toLeftOf="@id/imgAvatar"
             android:src="@drawable/ic_notification" />
 
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="75dp"
+            android:layout_height="78dp"
+            android:layout_marginRight="231dp"
             android:layout_toLeftOf="@id/imgNotification"
-            android:background="@drawable/search_background"
-            android:hint="Search food..."
-            android:paddingLeft="16dp"
-            android:drawableStart="@drawable/ic_search" />
+            android:src="@drawable/logowecare" />
+
 
     </RelativeLayout>
-
-    <!-- Popular Dishes Section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:layout_marginLeft="13dp"
+        android:id="@+id/khampha"
+        >
     <TextView
-        android:id="@+id/tvPopularDishes"
+        android:id="@+id/khamphatext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Khám phá"
+        android:layout_marginTop="10px"
+        android:textSize="20dp"
+        />
+
+        <TextView
+            android:id="@+id/thucdon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-91dp"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@+id/khamphatext"
+            android:text="thực đơn"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/orangeicon"
+            android:layout_width="45dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="249dp"
+            android:layout_toRightOf="@id/khamphatext"
+            android:src="@drawable/orangeiconpreview" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:id="@id/editTextSearch"
+        >
+    <LinearLayout
+        android:layout_width="300dp"
+        android:id="@+id/searchinput"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/search_background"
+        android:padding="0dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical">
+
+        <!-- Search Icon -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_search"
+            android:contentDescription="Search Icon" />
+
+        <!-- Text Input for Search -->
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="Search"
+            android:hint="Search"
+            android:textColor="#555"
+            android:background="@android:color/transparent"
+            android:paddingStart="8dp"
+            android:height="48dp"
+            android:textSize="16sp" />
+
+        <!-- Clear Button (X) -->
+        <ImageView
+            android:id="@+id/clearButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_clear"
+            android:visibility="gone"
+            android:contentDescription="Clear Search" />
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/greeicon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@id/searchinput"
+            android:src="@drawable/greeniconpreview" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/Phobien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phổ biến"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
         android:textStyle="bold"
-        android:textSize="18sp" />
+        android:layout_marginBottom="15dp"
+        />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPopularDishes"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal" />
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <!-- Suggested Dishes Section -->
-    <TextView
-        android:id="@+id/tvSuggestedDishes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gợi ý từ đầu bếp"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        <!-- Left Section with 3 Cards (2 on top, 1 on bottom) -->
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSuggestedDishes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+            <!-- Top 2 Cards in a Horizontal Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
 
-    <!-- Bottom Navigation Menu -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:menu="@menu/bottom_navigation_menu" />
+                <!-- First Card (Bệnh Gout) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="15dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/image_background"
+                            android:elevation="4dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/logowecare" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="Bệnh Gout"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Second Card (Bệnh tiểu đường) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="26dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="67dp"
+                            android:background="@drawable/image_background"
+                            android:contentDescription="TODO"
+                            android:elevation="4dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/logowecare" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="Bệnh tiểu đường"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Third Card (Single Large Card on the Bottom) -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/image_background"
+                    android:elevation="4dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logowecare" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Right Section with 1 Large Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="168dp"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Grid of Images -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:columnCount="2"
+                    android:rowCount="3">
+
+                    <!-- First image in the grid -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/image_background"
+                        android:elevation="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/logowecare" />
+
+                </GridLayout>
+
+                <!-- Title for the large card -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Thực đơn thịnh hành"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </LinearLayout>
