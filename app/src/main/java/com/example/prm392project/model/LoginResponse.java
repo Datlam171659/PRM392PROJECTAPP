@@ -49,6 +49,7 @@ public class LoginResponse {
         private String address;
         private int diseaseType;
         private String[] dietPlans;
+        private HealthMetric healthMetric;
 
         // Getters and setters for result fields
 
@@ -114,6 +115,72 @@ public class LoginResponse {
 
         public void setDietPlans(String[] dietPlans) {
             this.dietPlans = dietPlans;
+        }
+
+        public HealthMetric getHealthMetric() {
+            return healthMetric;
+        }
+
+        public void setHealthMetric(HealthMetric healthMetric) {
+            this.healthMetric = healthMetric;
+        }
+    }
+
+    public static class HealthMetric {
+        private String userId;
+        private String bloodSugar;
+        private String uricAcid;
+        private String weight;
+        private String bloodPressure;
+        private String note;
+
+        // Getters và setters cho HealthMetric
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getBloodSugar() {
+            return bloodSugar;
+        }
+
+        public void setBloodSugar(String bloodSugar) {
+            this.bloodSugar = bloodSugar;
+        }
+
+        public String getUricAcid() {
+            return uricAcid;
+        }
+
+        public void setUricAcid(String uricAcid) {
+            this.uricAcid = uricAcid;
+        }
+
+        public String getWeight() {
+            return weight;
+        }
+
+        public void setWeight(String weight) {
+            this.weight = weight;
+        }
+
+        public String getBloodPressure() {
+            return bloodPressure;
+        }
+
+        public void setBloodPressure(String bloodPressure) {
+            this.bloodPressure = bloodPressure;
+        }
+
+        public String getNote() {
+            return note;
+        }
+
+        public void setNote(String note) {
+            this.note = note;
         }
     }
 }
