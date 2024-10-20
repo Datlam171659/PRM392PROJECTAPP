@@ -1,5 +1,6 @@
 package com.example.prm392project.view;
 
+import com.example.prm392project.model.HealthMetricRequest;
 import com.example.prm392project.model.HealthMetricResponse;
 import com.example.prm392project.model.LoginRequest;
 import com.example.prm392project.model.LoginResponse;
@@ -24,4 +25,8 @@ public interface UserService {
 
     @GET("api/healthmetric/get-by-userId")
     Call<HealthMetricResponse> getHealthMetricsByUserId(@Query("userId") String userId);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/healthmetric/add")
+    Call<HealthMetricResponse> addHealthMetric(@Body HealthMetricRequest request);
 }

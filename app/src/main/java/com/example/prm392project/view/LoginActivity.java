@@ -89,9 +89,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Log.e("onLoginSuccess", "Login success" );
         // Chuyển sang màn hình chính hoặc lưu token
         String userId = String.valueOf(loginResponse.getResult().getId());
-        Log.e("USER_ID", userId);
+        String metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getUserId());
+
+
         Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
-        intent.putExtra("userId", userId);
+        intent.putExtra("USER_ID", userId);
+        intent.putExtra("METRIC_ID", metricId);
         startActivity(intent);
         finish();
     }
