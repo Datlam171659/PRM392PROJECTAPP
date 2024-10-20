@@ -33,7 +33,7 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
         setupViews();
 
         // Retrieve userId from Intent
-        String userId = getIntent().getStringExtra("userId"); // Get userId passed from LoginActivity
+        String userId = getIntent().getStringExtra("USER_ID"); // Get userId passed from LoginActivity
 
         if (userId != null) {
             presenter = new HealthDashboardPresenter(this); // Initialize the presenter
@@ -85,6 +85,7 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
             // For example, you can send these values to the presenter or make an API call.
 
             // Dismiss the dialog after submitting
+            submitHealthMetrics(bloodSugar, uricAcid, weight, bloodPressure);
             dialog.dismiss();
 
             // Display a Toast with the values (for demonstration purposes)
@@ -108,6 +109,35 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
 
         int progress = calculateHealthProgress(metric);
         animateProgress(progress);
+    }
+
+    private void submitHealthMetrics(String bloodSugar, String uricAcid, String weight, String bloodPressure) {
+        try {
+            int bloodSugarVal = Integer.parseInt(bloodSugar);
+            int uricAcidVal = Integer.parseInt(uricAcid);
+            int weightVal = Integer.parseInt(weight);
+
+            String metricId = getIntent().getStringExtra("METRIC_ID");
+            String userId = getIntent().getStringExtra("USER_ID");
+
+            if (metricId != null && userId != null) {
+                presenter.submitHealthMetrics(metricId, userId, bloodSugarVal, uricAcidVal, weightVal, bloodPressure);
+            } else {
+                onError("Missing metric ID or user ID");
+            }
+        } catch (NumberFormatException e) {
+            onError("Please enter valid numbers");
+        }
+    }
+
+    @Override
+    public void onHealthMetricSubmitted() {
+        Toast.makeText(this, "Health metrics submitted successfully", Toast.LENGTH_SHORT).show();
+        // Refresh the metrics display
+        String userId = getIntent().getStringExtra("USER_ID");
+        if (userId != null) {
+            presenter.fetchHealthMetrics(userId);
+        }
     }
 
     @Override

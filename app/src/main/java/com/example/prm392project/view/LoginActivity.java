@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         // Chuyển sang màn hình chính hoặc lưu token
         String userId = String.valueOf(loginResponse.getResult().getId());
-        String metricId = null;
+        String metricId = String.valueOf(loginResponse.getResult().getId());
 
         // Check if HealthMetric is null
         if (loginResponse.getResult().getHealthMetric() != null) {
