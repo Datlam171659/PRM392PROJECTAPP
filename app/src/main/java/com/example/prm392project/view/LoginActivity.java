@@ -87,14 +87,29 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         // Xử lý khi đăng nhập thành công
         Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
         Log.e("onLoginSuccess", "Login success" );
+
+        // Check if loginResponse or its result is null
+        if (loginResponse == null || loginResponse.getResult() == null) {
+            Toast.makeText(this, "Login response is invalid", Toast.LENGTH_SHORT).show();
+            Log.e("onLoginSuccess", "Login response or result is null");
+            return;
+        }
+
         // Chuyển sang màn hình chính hoặc lưu token
         String userId = String.valueOf(loginResponse.getResult().getId());
-        String metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getUserId());
+        String metricId = null;
 
+        // Check if HealthMetric is null
+        if (loginResponse.getResult().getHealthMetric() != null) {
+            metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getId());
+        } else {
+            Log.e("onLoginSuccess", "HealthMetric is null");
+        }
 
         Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
         intent.putExtra("USER_ID", userId);
         intent.putExtra("METRIC_ID", metricId);
+        Log.e("onLoginSuccess", "User ID: " + userId + ", Metric ID: " + metricId);
         startActivity(intent);
         finish();
     }

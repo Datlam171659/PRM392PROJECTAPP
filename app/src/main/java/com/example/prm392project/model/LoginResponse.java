@@ -127,7 +127,7 @@ public class LoginResponse {
     }
 
     public static class HealthMetric {
-        private String userId;
+        private String id;
         private String bloodSugar;
         private String uricAcid;
         private String weight;
@@ -135,12 +135,12 @@ public class LoginResponse {
         private String note;
 
         // Getters và setters cho HealthMetric
-        public String getUserId() {
-            return userId;
+        public String getId() {
+            return id;
         }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getBloodSugar() {
