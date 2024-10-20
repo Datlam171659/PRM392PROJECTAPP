@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profilelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFF">
+
+    <!-- Profile Image -->
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_avatar" />
+
+    <!-- Name under Profile Image -->
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Carely"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginTop="8dp" />
+
+    <!-- Đăng kí Premium -->
+    <TextView
+        android:id="@+id/tvPremium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng kí Premium"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_premium"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Tài khoản (with green profile icon and arrow) -->
+    <TextView
+        android:id="@+id/tvTaiKhoan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tài khoản"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_profile"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp" />
+
+    <!-- Cửa hàng của bạn (with green shop icon and arrow) -->
+    <TextView
+        android:id="@+id/tvCuaHangCuaBan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cửa hàng của bạn"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_shop"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp" />
+
+    <!-- Quyền riêng tư (with green star icon and arrow) -->
+    <TextView
+        android:id="@+id/tvQuyenRiengTu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quyền riêng tư"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_private"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp" />
+
+    <!-- Trợ giúp (with notebook icon and arrow) -->
+    <TextView
+        android:id="@+id/tvTroGiup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trợ giúp"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_help"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp" />
+
+    <!-- Đăng Xuất (with logout icon and arrow) -->
+    <TextView
+        android:id="@+id/tvDangXuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng Xuất"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_logout"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="10dp"
+        android:background="@drawable/textview_border"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
