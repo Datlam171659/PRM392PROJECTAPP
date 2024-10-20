@@ -31,16 +31,8 @@ public class LoginPresenter {
                 if (response.isSuccessful() && response.body().getToken() != null) {
                     LoginResponse loginResponse = response.body();
 
-                    // Lấy token
-                     String token = loginResponse.getToken();
-
-                    // Lấy id từ đối tượng result
-                    String id = loginResponse.getResult().getId();
-
-                    // Hiển thị hoặc sử dụng id và token
-                    Log.d("Login", "ID: " + id);
-
-                    view.onLoginSuccess(token);
+                    // Truyền cả token và đối tượng LoginResponse về View
+                    view.onLoginSuccess(loginResponse);
                 } else {
                     view.onLoginFailure("Login failed");
                 }
