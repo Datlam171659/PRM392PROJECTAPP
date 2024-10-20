@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "https://your-api-url.com/";
+    private static final String BASE_URL = "https://wecareexe201.azurewebsites.net/api/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance() {
@@ -16,5 +16,11 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+    public static MenuService getMenuItems() {
+        return getRetrofitInstance().create(MenuService.class);
+    }
+    public static MenuService getDishDetails() {
+        return getRetrofitInstance().create(MenuService.class);
     }
 }

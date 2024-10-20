@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Toast.makeText(this, "Login Success: " + token, Toast.LENGTH_SHORT).show();
         Log.e("onLoginSuccess", "Login success" );
         // Chuyển sang màn hình chính hoặc lưu token
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
         startActivity(intent);
         finish();
     }
