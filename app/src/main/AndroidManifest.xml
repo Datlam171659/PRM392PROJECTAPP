@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRM392PROJECT"
         tools:targetApi="31">
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".HealthDashboardActivity"/>
         <activity android:name=".view.RegisterActivity"/>
         <activity
-            android:name=".HealthDashboardActivity"
+            android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -26,7 +26,7 @@ public class LoginPresenter {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 view.hideLoading();
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful() && response.body().getToken() != null) {
                     view.onLoginSuccess(response.body().getToken());
                 } else {
                     view.onLoginFailure("Login failed");

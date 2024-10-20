@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.prm392project.HealthDashboardActivity;
 import com.example.prm392project.MainActivity;
 import com.example.prm392project.R;
 import com.example.prm392project.api.ApiService;
@@ -90,19 +91,21 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void onLoginSuccess(String token) {
         // Xử lý khi đăng nhập thành công
-        Toast.makeText(this, "Login Success: " + token, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
         Log.e("onLoginSuccess", "Login success" );
         // Chuyển sang màn hình chính hoặc lưu token
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
-    public void onLoginFailure(String message) {
-        // Xử lý khi đăng nhập thất bại
-        Toast.makeText(this, "Login Failed: " + message, Toast.LENGTH_SHORT).show();
-        Log.e("onLoginFailure", "Login failed" );
-    }
+public void onLoginFailure(String message) {
+    // Xử lý khi đăng nhập thất bại
+    Toast.makeText(this, "Login Failed: " + message, Toast.LENGTH_SHORT).show();
+    Log.e("onLoginFailure", "Login failed" );
+    emailEditText.setText("");
+    passwordEditText.setText("");
+}
 
 }
