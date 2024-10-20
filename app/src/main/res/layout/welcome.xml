@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/welcomeScreen">
+
+    <!-- Logo và hình ảnh -->
+
+    <!-- Nội dung chính -->
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="218dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="80dp"
+        android:src="@mipmap/logo_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/welcomeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/logoSmall"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity=""
+            android:src="@mipmap/logo_foreground" />
+
+        <TextView
+            android:id="@+id/welcomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="Chào mừng bạn đến với Wecare"
+            android:textColor="@color/orange"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/welcomeSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="4dp"
+            android:text="Thấu hiểu sức khoẻ và cùng bạn thiết kế thực đơn!"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <!-- Nút login bằng mạng xã hội -->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <ImageButton-->
+        <!--                android:id="@+id/facebookButton"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:background="FF8718" />-->
+
+        <!--            <ImageButton-->
+        <!--                android:id="@+id/googleButton"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:background="FF8718" />-->
+        <!--        </LinearLayout>-->
+
+        <!-- Nút bắt đầu -->
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:text="Bắt đầu"
+            android:textColor="@color/white" />
+        <!-- Text đăng nhập -->
+        <TextView
+            android:id="@+id/alreadyHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Bạn đã có tài khoản? Đăng nhập"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

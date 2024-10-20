@@ -1,5 +1,7 @@
 package com.example.prm392project.presenter;
 
+import android.util.Log;
+
 import com.example.prm392project.api.ApiService;
 import com.example.prm392project.model.LoginRequest;
 import com.example.prm392project.model.LoginResponse;
@@ -26,8 +28,11 @@ public class LoginPresenter {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 view.hideLoading();
-                if (response.isSuccessful() && response.body() != null) {
-                    view.onLoginSuccess(response.body().getToken());
+                if (response.isSuccessful() && response.body().getToken() != null) {
+                    LoginResponse loginResponse = response.body();
+
+                    // Truyền cả token và đối tượng LoginResponse về View
+                    view.onLoginSuccess(loginResponse);
                 } else {
                     view.onLoginFailure("Login failed");
                 }
