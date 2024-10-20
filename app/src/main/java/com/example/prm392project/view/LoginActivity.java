@@ -16,17 +16,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.prm392project.MainActivity;
+import com.example.prm392project.HealthDashboardActivity;
 import com.example.prm392project.R;
-import com.example.prm392project.api.ApiService;
 import com.example.prm392project.databinding.LoginBinding;
 import com.example.prm392project.model.LoginRequest;
 import com.example.prm392project.model.LoginResponse;
 import com.example.prm392project.presenter.LoginPresenter;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText emailEditText;
@@ -88,12 +83,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void onLoginSuccess(String token) {
+    public void onLoginSuccess(LoginResponse loginResponse) {
         // Xử lý khi đăng nhập thành công
-        Toast.makeText(this, "Login Success: " + token, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
         Log.e("onLoginSuccess", "Login success" );
         // Chuyển sang màn hình chính hoặc lưu token
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        String userId = String.valueOf(loginResponse.getResult().getId());
+        Log.e("USER_ID", userId);
+        Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
+        intent.putExtra("userId", userId);
         startActivity(intent);
         finish();
     }
@@ -103,6 +101,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         // Xử lý khi đăng nhập thất bại
         Toast.makeText(this, "Login Failed: " + message, Toast.LENGTH_SHORT).show();
         Log.e("onLoginFailure", "Login failed" );
+        emailEditText.setText("");
+        passwordEditText.setText("");
     }
 
 }

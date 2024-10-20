@@ -27,15 +27,23 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize ViewBinding for the layout
         binding = HealthpageBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot()); // Use binding to set the content view
+        setContentView(binding.getRoot());
 
         setupViews();
-        presenter = new HealthDashboardPresenter(this); // Initialize the presenter
-        presenter.fetchHealthMetrics("2d32bcd5-3203-4023-b0af-21fd1f443c88"); // Replace with dynamic userId if needed
 
-        // Set click listener on the CircularProgressIndicator
+        // Retrieve userId from Intent
+        String userId = getIntent().getStringExtra("userId"); // Get userId passed from LoginActivity
+
+        if (userId != null) {
+            presenter = new HealthDashboardPresenter(this); // Initialize the presenter
+            presenter.fetchHealthMetrics(userId); // Use the dynamic userId
+        } else {
+            // Handle the case when userId is not found
+            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
+            finish(); // Optional: finish the activity or redirect to login
+        }
+
         binding.progressIndicator.setOnClickListener(v -> showHealthInputDialog());
     }
 
