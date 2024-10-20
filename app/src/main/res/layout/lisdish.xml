@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:id="@id/editTextSearch"
+        android:id="@id/editTextSearchtext"
         >
     <LinearLayout
         android:layout_width="300dp"
@@ -104,7 +104,7 @@
             android:contentDescription="Search Icon" />
 
         <EditText
-            android:id="@+id/editTextSearch"
+            android:id="@+id/editTextSearchtext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -308,7 +308,7 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <!-- RecyclerView for trending menu, takes up remaining space and allows device-level scrolling -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

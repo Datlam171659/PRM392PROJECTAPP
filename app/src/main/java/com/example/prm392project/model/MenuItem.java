@@ -3,7 +3,7 @@ package com.example.prm392project.model;
 public class MenuItem {
     private String id;
     private String dishName;
-    private String imageUrl; // Ensure that field names match API response
+    private String imageUrl;
     private String description;
     private double calories;
     private double carbohydrates;

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.prm392project.HealthDashboardActivity;
 import com.example.prm392project.R;
 import com.example.prm392project.databinding.DishDetailBinding;
@@ -42,10 +43,7 @@ public class DetailDishActivity extends AppCompatActivity implements DishDetailV
                 startActivity(intent);
                 finish(); // Close this activity
             }
-
         });
-       ;
-
 
         // Get the data from intent
         Intent intent = getIntent();
@@ -53,14 +51,20 @@ public class DetailDishActivity extends AppCompatActivity implements DishDetailV
         String description = intent.getStringExtra("description");
         double calories = intent.getDoubleExtra("calories", 0.0); // default 0
         double protein = intent.getDoubleExtra("protein", 0.0); // default 0
+        String dishImage = intent.getStringExtra("dishImage");
 
         // Set data to views
         binding.dishNameTextView.setText(dishName);
         binding.descriptionTextView.setText(description);
         binding.Caloriesdata.setText("Calories: " + calories);
         binding.proteindata.setText("Protein: " + protein + "g");
-    }
 
+        // Load the dish image from the URL using Glide
+        Glide.with(this)
+                .load(dishImage)
+                .placeholder(R.drawable.logowecare) // Replace with an appropriate placeholder image
+                .into(binding.dishImage);
+    }
     @Override
     public void showDishDetails(MenuItem dish) {
         // Set data using View Binding
