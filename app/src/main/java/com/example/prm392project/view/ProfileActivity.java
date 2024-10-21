@@ -47,6 +47,13 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
 
         // Handle onClick for logout
         binding.tvDangXuat.setOnClickListener(v -> presenter.handleLogout());
+        binding.tvPremium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, UpdateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
