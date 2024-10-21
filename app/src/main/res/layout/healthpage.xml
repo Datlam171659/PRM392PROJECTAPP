@@ -19,14 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipGout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Gout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOverview" />
 
     <!-- Metrics Card -->
     <androidx.cardview.widget.CardView
@@ -39,7 +31,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toStartOf="@id/cardProgress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipGout">
+        app:layout_constraintTop_toBottomOf="@id/tvOverview">
 
         <LinearLayout
             android:layout_width="match_parent"

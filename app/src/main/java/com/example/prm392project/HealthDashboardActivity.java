@@ -81,8 +81,6 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
             String weight = etWeight.getText().toString();
             String bloodPressure = etBloodPressure.getText().toString();
 
-            // Here, you can handle the submission logic, such as updating health metrics
-            // For example, you can send these values to the presenter or make an API call.
 
             // Dismiss the dialog after submitting
             submitHealthMetrics(bloodSugar, uricAcid, weight, bloodPressure);
