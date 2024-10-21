@@ -1,0 +1,318 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:id="@+id/listmenu"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/logoaccount"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:layout_marginRight="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="48dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="-8dp"
+            android:src="@drawable/ic_avatar" />
+
+        <ImageView
+            android:id="@+id/imgNotification"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toLeftOf="@id/imgAvatar"
+            android:src="@drawable/ic_notification" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="83dp"
+            android:layout_height="74dp"
+            android:layout_marginRight="193dp"
+            android:layout_toLeftOf="@id/imgNotification"
+            android:src="@drawable/logowecare" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:layout_marginLeft="13dp"
+        android:id="@+id/khampha"
+        >
+
+        <TextView
+            android:id="@+id/khamphatext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:text="Khám phá"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/thucdon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-91dp"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@+id/khamphatext"
+            android:text="thực đơn"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/orangeicon"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginLeft="217dp"
+            android:layout_toRightOf="@id/khamphatext"
+            android:src="@drawable/orangeiconpreview" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:id="@id/editTextSearchtext"
+        >
+    <LinearLayout
+        android:layout_width="300dp"
+        android:id="@+id/searchinput"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/search_background"
+        android:padding="0dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_search"
+            android:contentDescription="Search Icon" />
+
+        <EditText
+            android:id="@+id/editTextSearchtext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="Search"
+            android:hint="Search"
+            android:textColor="#555"
+            android:background="@android:color/transparent"
+            android:paddingStart="8dp"
+            android:height="48dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/clearButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_clear"
+            android:visibility="gone"
+            android:contentDescription="Clear Search" />
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/greeicon"
+            android:layout_width="41dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/searchinput"
+            android:src="@drawable/greeniconpreview" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/Phobien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phổ biến"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="15dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="74dp"
+                            android:elevation="4dp"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/benhgout" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="Bệnh Gout"
+                            android:textColor="@android:color/black"
+                            android:textSize="11dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Second Card (Bệnh tiểu đường) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="26dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="67dp"
+                            android:contentDescription="TODO"
+                            android:elevation="4dp"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/tieuduong" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="Bệnh tiểu đường"
+                            android:textColor="@android:color/black"
+                            android:textSize="11dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:elevation="4dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/menu" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="168dp"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:columnCount="2"
+                    android:rowCount="3">
+
+                    <!-- First image in the grid -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="90dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:elevation="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/thinhhang" />
+
+                </GridLayout>
+
+                <!-- Title for the large card -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="9dp"
+                    android:text="Thực đơn thịnh hành"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <!-- Trending Menu Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Thực đơn thịnh hành"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="16dp" />
+</LinearLayout>

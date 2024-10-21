@@ -2,12 +2,14 @@ package com.example.prm392project;
 
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -17,12 +19,14 @@ import com.example.prm392project.databinding.HealthpageBinding;
 import com.example.prm392project.model.HealthMetric;
 import com.example.prm392project.presenter.HealthDashboardPresenter;
 import com.example.prm392project.view.HealthDashboardView;
+import com.example.prm392project.view.MenuActivity;
+import com.example.prm392project.view.ProfileActivity;
 
 public class HealthDashboardActivity extends AppCompatActivity implements HealthDashboardView {
 
     private HealthDashboardPresenter presenter;
     private HealthpageBinding binding; // Declare the ViewBinding
-
+    private Button btndish;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,22 +34,33 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
         binding = HealthpageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        btndish = findViewById(R.id.btndish); // Move this after setContentView
+
         setupViews();
 
         // Retrieve userId from Intent
-        String userId = getIntent().getStringExtra("USER_ID"); // Get userId passed from LoginActivity
+        String userId = getIntent().getStringExtra("USER_ID");
 
         if (userId != null) {
-            presenter = new HealthDashboardPresenter(this); // Initialize the presenter
-            presenter.fetchHealthMetrics(userId); // Use the dynamic userId
+            presenter = new HealthDashboardPresenter(this);
+            presenter.fetchHealthMetrics(userId);
         } else {
-            // Handle the case when userId is not found
             Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
-            finish(); // Optional: finish the activity or redirect to login
+            finish();
         }
+
+        btndish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HealthDashboardActivity.this, MenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         binding.progressIndicator.setOnClickListener(v -> showHealthInputDialog());
     }
+
 
     private void setupViews() {
         // No need for findViewById, directly access views via binding
