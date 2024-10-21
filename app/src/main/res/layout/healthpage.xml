@@ -21,6 +21,17 @@
 
 
     <!-- Metrics Card -->
+
+    <Button
+        android:id="@+id/btndish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:text="Dish"
+        app:layout_constraintLeft_toRightOf="@id/chipGout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="57dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardMetrics"
         android:layout_width="0dp"
