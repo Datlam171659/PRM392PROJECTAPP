@@ -1,6 +1,5 @@
 package com.example.prm392project.view;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
@@ -12,10 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.prm392project.R;
 import com.example.prm392project.model.PaymentModel;
 import com.example.prm392project.presenter.PaymentPresenter;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class PaymentQRCodeActivity extends AppCompatActivity implements PaymentQRCodeView {
     private PaymentPresenter presenter;
@@ -39,14 +34,15 @@ public class PaymentQRCodeActivity extends AppCompatActivity implements PaymentQ
         String selectedPackage = getIntent().getStringExtra("SELECTED_PACKAGE");
         presenter.generatePaymentDetails(selectedPackage);
 
-        // Khởi động bộ đếm thời gian 30 phút
         startCountdownTimer();
 
-        backButton.setOnClickListener(view -> finish()); // Quay lại màn hình trước
+        backButton.setOnClickListener(view -> finish());
+
+        qrCodeImage.setImageResource(R.drawable.qr_bank);
     }
 
     private void startCountdownTimer() {
-        new CountDownTimer(1800000, 1000) { // 30 phút
+        new CountDownTimer(600000, 1000) { // 30 phút
             public void onTick(long millisUntilFinished) {
                 long minutes = (millisUntilFinished / 1000) / 60;
                 long seconds = (millisUntilFinished / 1000) % 60;
@@ -66,20 +62,5 @@ public class PaymentQRCodeActivity extends AppCompatActivity implements PaymentQ
                 "\nSố tài khoản: " + payment.getAccountNumber() +
                 "\nChủ tài khoản: " + payment.getAccountHolder());
         paymentDetails.setText("Số tiền: " + payment.getAmount() + "\nNội dung chuyển tiền: " + payment.getContent());
-
-        // Hiển thị mã QR
-        generateQRCode(payment.getAmount(), payment.getContent());
-    }
-
-    private void generateQRCode(String amount, String content) {
-        String qrData = "Amount: " + amount + "\nContent: " + content;
-        try {
-            BitMatrix bitMatrix = new com.google.zxing.qrcode.QRCodeWriter().encode(qrData, BarcodeFormat.QR_CODE, 200, 200);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            qrCodeImage.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
     }
 }

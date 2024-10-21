@@ -15,9 +15,9 @@ public class UpdateAccountPresenter {
 
     public List<PackageModel> getPackages() {
         List<PackageModel> packages = new ArrayList<>();
-        packages.add(new PackageModel("Goi 1: 199.000 VNĐ", "199000"));
-        packages.add(new PackageModel("Gói 2: 349.000 VNĐ", "349000"));
-        packages.add(new PackageModel("Gói 3: 499.000 VNĐ", "499000"));
+        packages.add(new PackageModel("WeCare Bạc: 199.000 VND/tháng", "Tư vấn từ chuyên gia dinh dưỡng mỗi tháng, và các tính năng gói Bạc"));
+        packages.add(new PackageModel("WeCare Vàng: 349.000 VND/tháng", "Tư vấn video call 2 lần/tháng, kiểm tra sức khỏe 6 tháng/lần, và lợi ích gói Vàng."));
+        packages.add(new PackageModel("WeCare KC: 499.000 VND/tháng", "Hỗ trợ 24/7, kiểm tra sức khỏe 3 tháng/lần, tư vấn cá nhân hóa, và lợi ích gói KC."));
         return packages;
     }
 

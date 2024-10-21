@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
-    android:background="#F9F9F9"
-    tools:ignore="ExtraText">
+    android:background="#FFF">
 
     <TextView
         android:id="@+id/premiumTitle"
@@ -25,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:orientation="vertical">
+        <!-- Các gói sẽ được thêm động ở đây -->
     </LinearLayout>
 
     <Button
@@ -34,5 +32,7 @@
         android:text="Tạo mã thanh toán"
         android:textColor="#FFFFFF"
         android:backgroundTint="#FF8800"
-        android:layout_marginTop="24dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"/>
 </LinearLayout>
