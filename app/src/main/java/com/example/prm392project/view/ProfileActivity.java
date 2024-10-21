@@ -1,7 +1,5 @@
 package com.example.prm392project.view;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -44,18 +42,5 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void logout() {
-        // Clear stored session data (e.g., token, user data)
-        SharedPreferences preferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear(); // Clear all stored data
-        editor.apply(); // Commit the changes
-
-        // Navigate to WelcomeActivity
-        Intent intent = new Intent(ProfileActivity.this, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear the activity stack
-        startActivity(intent);
-        finish();
-    }
 }
 

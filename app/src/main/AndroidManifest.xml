@@ -26,6 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HealthDashboardActivity"/>
+        <activity android:name=".view.RegisterActivity"/>
         <activity android:name=".view.ProfileActivity"/>
         <activity android:name=".view.LoginActivity"/>
     </application>

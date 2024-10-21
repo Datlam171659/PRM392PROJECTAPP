@@ -2,23 +2,22 @@ package com.example.prm392project.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-
+import com.example.prm392project.model.ProfileModel;
 import com.example.prm392project.view.ProfileView;
 import com.example.prm392project.view.WelcomeActivity;
 
 public class ProfilePresenter {
     private ProfileView view;
-    private Context context;
+    private ProfileModel model;
 
     public ProfilePresenter(ProfileView view, Context context) {
         this.view = view;
-        this.context = context;
+        this.model = new ProfileModel(context);  // Khởi tạo model
     }
 
     public void loadUserProfile() {
-        // Simulated user data fetching
-        String userName = "Carely"; // Replace with real data if needed
+        // Giả lập việc load dữ liệu người dùng
+        String userName = "Carely";
 
         if (userName != null) {
             view.showUserInfo(userName);
@@ -28,15 +27,12 @@ public class ProfilePresenter {
     }
 
     public void handleLogout() {
-        // Clear stored tokens (if any)
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear(); // Clear all data
-        editor.apply();
+        // Gọi model để xóa dữ liệu session
+        model.clearSession();
 
-        // Redirect to WelcomeActivity
-        Intent intent = new Intent(context, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear backstack
-        context.startActivity(intent);
+        // Điều hướng về WelcomeActivity
+        Intent intent = new Intent((Context) view, WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        ((Context) view).startActivity(intent);
     }
 }
