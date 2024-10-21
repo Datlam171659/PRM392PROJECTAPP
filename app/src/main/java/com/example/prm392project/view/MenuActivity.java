@@ -38,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
     private DishAdapter dishAdapter;
     private ImageView imgAvatar;
     private List<MenuItem> allDishes; // Store all dishes for filtering
-
+    private ImageView backIcon;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,19 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // Grid of 2 columns
+        backIcon = findViewById(R.id.backIcon);
 
+        // Set a click listener on the backIcon
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go back to MenuListActivity when the backIcon is clicked
+                Intent intent = new Intent(MenuActivity.this, HealthDashboardActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish(); // Close this activity
+            }
+        });
         imgAvatar.setOnClickListener(v -> {
             // Go back to ProfileActivity when the avatar is clicked
             Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
