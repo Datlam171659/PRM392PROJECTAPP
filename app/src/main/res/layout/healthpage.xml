@@ -8,19 +8,16 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvOverview"
+    <Button
+        android:id="@+id/chipGout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Tổng quan"
+        android:text="Hồ sơ sức khỏe"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <!-- Metrics Card -->
 
     <Button
         android:id="@+id/btndish"
@@ -28,9 +25,28 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="220dp"
         android:text="Dish"
-        app:layout_constraintLeft_toRightOf="@id/chipGout"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/chipGout"
+        app:layout_constraintTop_toTopOf="@id/chipGout"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="57dp" />
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Tổng quan"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGout" />
+
+
+    <!-- Metrics Card -->
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardMetrics"

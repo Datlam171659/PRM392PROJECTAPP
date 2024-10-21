@@ -16,7 +16,7 @@ import com.example.prm392project.model.MenuItem;
 import com.example.prm392project.presenter.DishDetailPresenter;
 import com.example.prm392project.view.DishDetailView;
 
-public class DetailDishActivity extends AppCompatActivity implements DishDetailView {
+public class  DetailDishActivity extends AppCompatActivity implements DishDetailView {
 
     private DishDetailPresenter presenter;
     private DishDetailBinding binding;
