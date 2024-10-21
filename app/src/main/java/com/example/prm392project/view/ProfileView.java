@@ -1,6 +1,6 @@
-package com.example.prm392project.view;
+    package com.example.prm392project.view;
 
-public interface ProfileView {
-    void showUserInfo(String name);
-    void showError(String message);
-}
+    public interface ProfileView {
+        void showUserInfo(String name);
+        void showError(String message);
+    }

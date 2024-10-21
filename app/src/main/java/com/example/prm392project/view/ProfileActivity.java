@@ -1,5 +1,7 @@
 package com.example.prm392project.view;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -21,13 +23,13 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
         setContentView(binding.getRoot());
 
         // Initialize Presenter
-        presenter = new ProfilePresenter(this);
+        presenter = new ProfilePresenter(this, this);
 
         // Load user profile data
         presenter.loadUserProfile();
 
-        // Handle onClick events, e.g., for the logout button
-        binding.tvDangXuat.setOnClickListener(v -> logout());
+        // Handle onClick for logout
+        binding.tvDangXuat.setOnClickListener(v -> presenter.handleLogout());
     }
 
     @Override
@@ -43,7 +45,17 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
     }
 
     private void logout() {
-        // Handle logout logic
+        // Clear stored session data (e.g., token, user data)
+        SharedPreferences preferences = getSharedPreferences("user_session", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // Clear all stored data
+        editor.apply(); // Commit the changes
+
+        // Navigate to WelcomeActivity
+        Intent intent = new Intent(ProfileActivity.this, WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear the activity stack
+        startActivity(intent);
+        finish();
     }
 }
 
