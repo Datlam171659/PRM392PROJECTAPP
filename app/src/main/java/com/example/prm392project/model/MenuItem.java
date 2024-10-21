@@ -1,13 +1,13 @@
 package com.example.prm392project.model;
 
 public class MenuItem {
-    private String id;
-    private String dishName;
+    private String dietitianId;
+    private String menuName;
     private String imageUrl;
     private String description;
-    private double calories;
+    private double totalCalories;
     private double carbohydrates;
-    private double protein;
+    private double totalProtein;
     private double fat;
     private double fiber;
     private double sugar;
@@ -15,19 +15,19 @@ public class MenuItem {
     private double cholesterol;
     // Getters and Setters for each field
     public String getId() {
-        return id;
+        return dietitianId;
     }
 
     public void setId(int id) {
-        this.id = String.valueOf(id);
+        this.dietitianId = String.valueOf(id);
     }
 
     public String getName() {
-        return dishName;
+        return menuName;
     }
 
     public void setName(String name) {
-        this.dishName = name;
+        this.menuName = name;
     }
 
     public String getImageUrl() {
@@ -41,14 +41,14 @@ public class MenuItem {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public double getCalories() { return calories; }
-    public void setCalories(int calories) { this.calories = calories; }
+    public double getCalories() { return totalCalories; }
+    public void setCalories(int calories) { this.totalCalories = calories; }
 
     public double getCarbohydrates() { return carbohydrates; }
     public void setCarbohydrates(int carbohydrates) { this.carbohydrates = carbohydrates; }
 
-    public double getProtein() { return protein; }
-    public void setProtein(double protein) { this.protein = protein; }
+    public double getProtein() { return totalProtein; }
+    public void setProtein(double protein) { this.totalProtein = protein; }
 
     public double getFat() { return fat; }
     public void setFat(int fat) { this.fat = fat; }
