@@ -17,6 +17,8 @@
         <activity android:name=".view.DetailDishActivity"/>
         <activity android:name=".view.MenuActivity"/>
         <activity android:name=".HealthDashboardActivity"/>
+        <activity android:name=".view.UpdateAccountActivity" />
+        <activity android:name=".view.PaymentQRCodeActivity" />
         <activity
             android:name=".view.WelcomeActivity"
             android:exported="true">
@@ -26,8 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HealthDashboardActivity"/>
-        <activity android:name=".view.RegisterActivity"/>
         <activity android:name=".view.ProfileActivity"/>
         <activity android:name=".view.LoginActivity"/>
     </application>

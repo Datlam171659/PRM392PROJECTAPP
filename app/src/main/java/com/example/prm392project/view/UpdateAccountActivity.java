@@ -33,13 +33,12 @@ public class UpdateAccountActivity extends AppCompatActivity implements UpdateAc
         Button createPaymentCodeButton = findViewById(R.id.createPaymentCodeButton);
         presenter = new UpdateAccountPresenter(this);
 
-        // Hiển thị danh sách gói
         displayPackages(presenter.getPackages());
 
         createPaymentCodeButton.setOnClickListener(view -> {
             if (selectedPackage != null) {
                 presenter.createPaymentCode(selectedPackage);
-                resetSelectedPackage(); // Đặt lại màu cho gói khi bấm thanh toán
+                resetSelectedPackage();
             } else {
                 Toast.makeText(this, "Vui lòng chọn một gói trước khi thanh toán.", Toast.LENGTH_SHORT).show();
             }

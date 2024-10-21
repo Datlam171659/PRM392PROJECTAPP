@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:orientation="vertical">
-        <!-- Các gói sẽ được thêm động ở đây -->
     </LinearLayout>
 
     <Button
