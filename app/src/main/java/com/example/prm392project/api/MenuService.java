@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 
 public interface MenuService {
     // Example for getting a list of menu items
-    @GET("dish/get-all")
+    @GET("menu/get-all")
     Call<MenuItemResponse> getMenuItems();
-    @GET("dish/get-by-id/{id}")
+    @GET("menu/get-all-by-dietitian-id/{id}")
     Call<MenuItem> getDishDetails(@Path("id") String dishId);
 }
