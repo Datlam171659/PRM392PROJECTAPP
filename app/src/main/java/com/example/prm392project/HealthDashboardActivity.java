@@ -160,7 +160,7 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
 
     private int calculateHealthProgress(HealthMetric metric) {
         // Custom logic to calculate health progress based on the metrics
-        return 75; // Placeholder for now
+        return 75;
     }
 
     private void animateProgress(int newProgress) {
