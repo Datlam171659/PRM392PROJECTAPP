@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void fetchDishes() {
-        MenuService menuService = ApiClient.getMenuItems();
+        MenuService menuService = ApiClient.getMenuService();
         Call<MenuItemResponse> call = menuService.getMenuItems();
 
         call.enqueue(new Callback<MenuItemResponse>() {

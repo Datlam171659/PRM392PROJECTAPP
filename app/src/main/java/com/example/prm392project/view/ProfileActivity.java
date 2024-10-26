@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
     private ProfileBinding binding;
     private ProfilePresenter presenter;
     private ImageView backIcon;
-
+    private TextView tvCuaHangCuaBan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,14 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
             startActivity(intent);
             finish();
         });
-
+        tvCuaHangCuaBan = findViewById(R.id.tvCuaHangCuaBan);
+        tvCuaHangCuaBan.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, FavoriteMenuActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
         // Initialize Presenter with userId
         presenter = new ProfilePresenter(this, this, userId);
         presenter.loadUserProfile();

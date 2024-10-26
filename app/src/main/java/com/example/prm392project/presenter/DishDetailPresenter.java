@@ -15,7 +15,7 @@ public class DishDetailPresenter implements DishPresenterImp {
 
     public DishDetailPresenter(DishDetailView view) {
         this.view = view;
-        this.apiService = ApiClient.getDishDetails(); // Initialize API service
+        this.apiService = ApiClient.getMenuService(); // Initialize API service
     }
 
     @Override
