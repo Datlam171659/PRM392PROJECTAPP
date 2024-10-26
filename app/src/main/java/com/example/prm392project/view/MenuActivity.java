@@ -67,6 +67,7 @@ public class MenuActivity extends AppCompatActivity {
         imgAvatar.setOnClickListener(v -> {
             // Go back to ProfileActivity when the avatar is clicked
             Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
+            intent.putExtra("USER_ID", userId);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish(); // Close this activity

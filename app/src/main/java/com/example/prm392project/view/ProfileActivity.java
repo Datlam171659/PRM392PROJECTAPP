@@ -13,7 +13,6 @@ import com.example.prm392project.databinding.ProfileBinding;
 import com.example.prm392project.presenter.ProfilePresenter;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileView {
-
     private ProfileBinding binding;
     private ProfilePresenter presenter;
     private ImageView backIcon;
@@ -22,51 +21,38 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up ViewBinding
         binding = ProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Find the back button (ImageView) by its ID
+        String userId = getIntent().getStringExtra("USER_ID");
+
         backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Go back to MenuListActivity when the backIcon is clicked
-                Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); // Close this activity
-            }
+        backIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
 
-        // Initialize Presenter
-        presenter = new ProfilePresenter(this, this);
-
-        // Load user profile data
+        // Initialize Presenter with userId
+        presenter = new ProfilePresenter(this, this, userId);
         presenter.loadUserProfile();
 
-        // Handle onClick for logout
         binding.tvDangXuat.setOnClickListener(v -> presenter.handleLogout());
-        binding.tvPremium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, UpdateAccountActivity.class);
-                startActivity(intent);
-            }
+        binding.tvPremium.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, UpdateAccountActivity.class);
+            startActivity(intent);
         });
     }
 
     @Override
     public void showUserInfo(String name) {
-        // Display user name on the profile screen
         binding.profileName.setText(name);
     }
 
     @Override
     public void showError(String message) {
-        // Handle error (e.g., show a toast or alert dialog)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
 }
-
