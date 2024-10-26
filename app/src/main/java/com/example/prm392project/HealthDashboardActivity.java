@@ -160,8 +160,17 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
     }
 
     private int calculateHealthProgress(HealthMetric metric) {
-        // Custom logic to calculate health progress based on the metrics
-        return 75;
+        switch (metric.getBloodPressure()) {
+            case "Normal":
+                return 75;
+            case "High":
+            case "Low":
+                return 15;
+            case "Good":
+                return 100;
+            default:
+                return 0;
+        }
     }
 
     private void animateProgress(int newProgress) {
