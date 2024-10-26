@@ -50,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // Grid of 2 columns
         backIcon = findViewById(R.id.backIcon);
+        String userId = getIntent().getStringExtra("USER_ID");
 
         // Set a click listener on the backIcon
         backIcon.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +58,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Go back to MenuListActivity when the backIcon is clicked
                 Intent intent = new Intent(MenuActivity.this, HealthDashboardActivity.class);
+                intent.putExtra("USER_ID", userId);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish(); // Close this activity

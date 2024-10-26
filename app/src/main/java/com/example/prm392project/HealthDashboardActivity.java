@@ -53,6 +53,7 @@ public class HealthDashboardActivity extends AppCompatActivity implements Health
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HealthDashboardActivity.this, MenuActivity.class);
+                intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
             }
