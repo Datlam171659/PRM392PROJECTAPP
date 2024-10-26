@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                RegisterRequest registerRequest = new RegisterRequest(userName, name, email, password);
+                RegisterRequest registerRequest = new RegisterRequest(userName, name, email, password, 0,2);
 
                 // Gọi presenter để xử lý đăng ký
                 presenter.register(registerRequest);

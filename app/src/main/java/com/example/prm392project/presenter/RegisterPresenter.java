@@ -1,5 +1,7 @@
 package com.example.prm392project.presenter;
 
+import android.util.Log;
+
 import com.example.prm392project.api.ApiService;
 import com.example.prm392project.model.RegisterRequest;
 import com.example.prm392project.model.RegisterResponse;
@@ -28,6 +30,7 @@ public class RegisterPresenter {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 view.hideLoading();
                 if (response.isSuccessful()) {
+                    Log.d("RegisterPresenter", "onResponse: " + response.body().isSuccess());
                     view.onRegisterSuccess("Register success");
                 } else {
                     view.onRegisterFailure("Register failed");
