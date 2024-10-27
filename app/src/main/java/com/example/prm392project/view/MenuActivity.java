@@ -39,6 +39,8 @@ public class MenuActivity extends AppCompatActivity {
     private ImageView imgAvatar;
     private List<MenuItem> allDishes; // Store all dishes for filtering
     private ImageView backIcon;
+    private String dietplanId;
+    private String userId;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,34 +49,32 @@ public class MenuActivity extends AppCompatActivity {
 
         imgAvatar = findViewById(R.id.imgAvatar);
         recyclerView = findViewById(R.id.recyclerView);
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // Grid of 2 columns
         backIcon = findViewById(R.id.backIcon);
-        String userId = getIntent().getStringExtra("USER_ID");
 
-        // Set a click listener on the backIcon
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Go back to MenuListActivity when the backIcon is clicked
-                Intent intent = new Intent(MenuActivity.this, HealthDashboardActivity.class);
-                intent.putExtra("USER_ID", userId);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); // Close this activity
-            }
-        });
-        imgAvatar.setOnClickListener(v -> {
-            // Go back to ProfileActivity when the avatar is clicked
-            Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
+        // Retrieve dietplanId and userId from intent and assign to class variables
+        dietplanId = getIntent().getStringExtra("DIET_ID");
+        userId = getIntent().getStringExtra("USER_ID");
+
+        // Set click listeners
+        backIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, HealthDashboardActivity.class);
             intent.putExtra("USER_ID", userId);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish(); // Close this activity
         });
 
-        fetchDishes();
+        imgAvatar.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Pass dietplanId
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
 
+        fetchDishes();
     }
 
     private void fetchDishes() {
@@ -86,8 +86,9 @@ public class MenuActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<MenuItemResponse> call, @NonNull Response<MenuItemResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     // Store all dishes to filter later
+                    Log.e("FavoriteMenuActivity", "user ID: " + userId);
                     allDishes = response.body().getResults();
-                    dishAdapter = new DishAdapter(MenuActivity.this, allDishes);
+                    dishAdapter = new DishAdapter(MenuActivity.this, allDishes, dietplanId, userId);
                     recyclerView.setAdapter(dishAdapter);
                 } else {
                     Toast.makeText(MenuActivity.this, "Failed to fetch data from server.", Toast.LENGTH_SHORT).show();
@@ -109,8 +110,6 @@ public class MenuActivity extends AppCompatActivity {
                 filteredList.add(item);
             }
         }
-        // Update adapter with the filtered list
         dishAdapter.updateList(filteredList);
     }
 }
-

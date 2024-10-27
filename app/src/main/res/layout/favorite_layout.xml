@@ -20,7 +20,7 @@
             android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favorite Menu"
+            android:text="Menu Yêu Thích"
             android:textSize="20sp"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Create Favorite Menu"
+        android:text="Tạo Menu Yêu Thích"
         android:visibility="visible" />
 
     <!-- TextView when no favorite items exist -->

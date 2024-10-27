@@ -13,9 +13,81 @@ public class MenuItem {
     private double sugar;
     private double purine;
     private double cholesterol;
+    private String dietplanId;
+    private String id;
+
+    public MenuItem(String dietplanId, String id) {
+        this.dietplanId = dietplanId;
+        this.id = id;
+    }
+
+    public String getDietplanId() {
+        return dietplanId;
+    }
+
+    public void setDietplanId(String dietplanId) {
+        this.dietplanId = dietplanId;
+    }
+
     // Getters and Setters for each field
     public String getId() {
+        return id;
+    }
+
+    public String getDietitianId() {
         return dietitianId;
+    }
+
+    public void setDietitianId(String dietitianId) {
+        this.dietitianId = dietitianId;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public void setTotalCalories(double totalCalories) {
+        this.totalCalories = totalCalories;
+    }
+
+    public void setCarbohydrates(double carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public void setTotalProtein(double totalProtein) {
+        this.totalProtein = totalProtein;
+    }
+
+    public void setFat(double fat) {
+        this.fat = fat;
+    }
+
+    public void setSugar(double sugar) {
+        this.sugar = sugar;
+    }
+
+    public void setPurine(double purine) {
+        this.purine = purine;
+    }
+
+    public void setCholesterol(double cholesterol) {
+        this.cholesterol = cholesterol;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public double getTotalCalories() {
+        return totalCalories;
+    }
+
+    public double getTotalProtein() {
+        return totalProtein;
     }
 
     public void setId(int id) {
@@ -61,7 +133,23 @@ public class MenuItem {
 
     public double getPurine() { return purine; }
     public void setPurine(int purine) { this.purine = purine; }
+    public static class DietPlanRequest {
+        private String menuId;
+        private String dietPlanId;
 
+        public DietPlanRequest(String menuId, String dietPlanId) {
+            this.menuId = menuId;
+            this.dietPlanId = dietPlanId;
+        }
+
+        public String getMenuId() {
+            return menuId;
+        }
+
+        public String getDietPlanId() {
+            return dietPlanId;
+        }
+    }
     public double getCholesterol() { return cholesterol; }
     public void setCholesterol(int cholesterol) { this.cholesterol = cholesterol; }
 }

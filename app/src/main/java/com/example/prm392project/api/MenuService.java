@@ -11,7 +11,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MenuService {
     // Example for getting a list of menu items
@@ -19,9 +21,13 @@ public interface MenuService {
     Call<MenuItemResponse> getMenuItems();
     @GET("menu/get-all-by-dietitian-id/{id}")
     Call<MenuItem> getDishDetails(@Path("id") String dishId);
-    @GET("dietplan/get-by-user-id/{userId}")
-    Call<FavoriteMenuResponse> getFavoriteMenu(@Path("userId") String userId);
+    @GET("dietplan/get-by-id/{Id}")
+    Call<FavoriteMenuResponse> getFavoriteMenu(@Path("Id") String userId);
 
     @POST("dietplan/add")
-    Call<DietItem> createFavoriteMenu(@Body DietItem dietItem);
+    Call<MenuItem> createFavoriteMenu(@Body DietItem dietItem);
+    @POST("menudietplan/add")
+    Call<MenuItem> Addmenudietplan(@Body MenuItem.DietPlanRequest dietPlanRequest);
+    @PUT("menudietplan/delete")
+    Call<Void> deleteMenuDietPlan(@Query("idDietPlan") String idDietPlan, @Query("idMenu") String idMenu);
 }

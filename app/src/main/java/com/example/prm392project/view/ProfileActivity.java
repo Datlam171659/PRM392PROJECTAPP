@@ -18,6 +18,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
     private ProfilePresenter presenter;
     private ImageView backIcon;
     private TextView tvCuaHangCuaBan;
+    private String dietplanId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +27,12 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
         setContentView(binding.getRoot());
 
         String userId = getIntent().getStringExtra("USER_ID");
-
+        dietplanId = getIntent().getStringExtra("DIET_ID");
         backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
             intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Truyền lại dietplanId
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
@@ -39,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
         tvCuaHangCuaBan.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, FavoriteMenuActivity.class);
             intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Truyền dietplanId
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

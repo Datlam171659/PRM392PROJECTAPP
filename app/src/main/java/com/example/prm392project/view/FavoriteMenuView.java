@@ -1,12 +1,12 @@
 package com.example.prm392project.view;
 
-import com.example.prm392project.model.DietItem;
+import com.example.prm392project.model.MenuItem;
 
 import java.util.List;
 
 public interface FavoriteMenuView {
     // Displays the list of favorite menu items
-    void showFavoriteMenu(List<DietItem> menuItems);
+    void showFavoriteMenu(List<MenuItem> menuItems);
 
     // Displays a message when there are no favorite menu items
     void showNoFavorites(String message);

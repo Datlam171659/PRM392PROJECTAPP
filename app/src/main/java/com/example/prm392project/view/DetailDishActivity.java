@@ -2,6 +2,7 @@ package com.example.prm392project.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,11 +22,14 @@ public class  DetailDishActivity extends AppCompatActivity implements DishDetail
     private DishDetailPresenter presenter;
     private DishDetailBinding binding;
     private ImageView backIcon; // Declare back button ImageView
-
+    private String userId;
+    private String dietplanId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        dietplanId = getIntent().getStringExtra("DIET_ID");
+        Log.e("FavoriteMenuActivity", "DietPlan ID: " + userId);
+        userId = getIntent().getStringExtra("USER_ID");
         // Initialize View Binding
         binding = DishDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -34,15 +38,13 @@ public class  DetailDishActivity extends AppCompatActivity implements DishDetail
         backIcon = findViewById(R.id.backIcon);
 
         // Set a click listener on the backIcon
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Go back to MenuListActivity when the backIcon is clicked
-                Intent intent = new Intent(DetailDishActivity.this, MenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); // Close this activity
-            }
+        backIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailDishActivity.this, MenuActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
 
         // Get the data from intent

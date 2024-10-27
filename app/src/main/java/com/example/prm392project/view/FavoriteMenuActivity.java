@@ -3,6 +3,7 @@ package com.example.prm392project.view;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.prm392project.HealthDashboardActivity;
 import com.example.prm392project.R;
 import com.example.prm392project.Adapter.FavoriteMenuAdapter;
 import com.example.prm392project.api.ApiClient;
 import com.example.prm392project.api.MenuService;
 import com.example.prm392project.model.DietItem;
+import com.example.prm392project.model.MenuItem;
 import com.example.prm392project.presenter.FavoriteMenuPresenter;
 
 import java.util.List;
@@ -29,19 +30,20 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
     private Button createFavoriteMenuButton;
     private RecyclerView favoriteMenuRecycler;
     private String userId;
-    private String dietPlanId;
+    private String dietplanId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorite_layout);
-
+        dietplanId = getIntent().getStringExtra("DIET_ID");
+        Log.e("FavoriteMenuActivity", "DietPlan ID: " + dietplanId);
         userId = getIntent().getStringExtra("USER_ID");
         if (userId == null || userId.isEmpty()) {
             showError("User ID is missing.");
             finish();
             return;
         }
-
         MenuService menuService = ApiClient.getMenuService();
         presenter = new FavoriteMenuPresenter(this, menuService);
 
@@ -50,23 +52,19 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
 
         // Back button setup
         ImageView backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Go back to MenuListActivity when the backIcon is clicked
-                Intent intent = new Intent(FavoriteMenuActivity.this, ProfileActivity.class);
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("DIET_PLAN_ID", dietPlanId);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); // Close this activity
-            }
+        backIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(FavoriteMenuActivity.this, ProfileActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Truyền lại dietplanId
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
 
         favoriteMenuRecycler.setLayoutManager(new LinearLayoutManager(this));
         createFavoriteMenuButton.setOnClickListener(v -> showCreateMenuDialog());
 
-        presenter.getFavoriteMenu(userId);
+        presenter.getFavoriteMenu(dietplanId);
     }
 
     private void showCreateMenuDialog() {
@@ -95,8 +93,8 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
     }
 
     @Override
-    public void showFavoriteMenu(List<DietItem> dietItems) {
-        adapter = new FavoriteMenuAdapter(dietItems);
+    public void showFavoriteMenu(List<MenuItem> dietItems) {
+        adapter = new FavoriteMenuAdapter(this, dietItems, dietplanId, userId); // Pass dietplanId and userId here
         favoriteMenuRecycler.setAdapter(adapter);
         favoriteMenuRecycler.setVisibility(View.VISIBLE);
         createFavoriteMenuButton.setVisibility(View.GONE);
@@ -117,7 +115,7 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
 
     @Override
     public void storeDietPlanId(String dietPlanId) {
-        this.dietPlanId = dietPlanId;
+        this.dietplanId = dietPlanId;
     }
     @Override
     public void showError(String message) {
@@ -133,4 +131,5 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
     public String getUserId() {
         return userId;
     }
+
 }
