@@ -48,6 +48,8 @@ public class LoginResponse {
         private String imageUrl;
         private String address;
         private int diseaseType;
+        private int userType; // Thêm trường userType
+        private Integer userRole; // Thêm trường userRole
         private String[] dietPlans;
         private HealthMetric healthMetric;
 
@@ -123,6 +125,22 @@ public class LoginResponse {
 
         public void setHealthMetric(HealthMetric healthMetric) {
             this.healthMetric = healthMetric;
+        }
+
+        public Integer getUserRole() {
+            return userRole;
+        }
+
+        public void setUserRole(Integer userRole) {
+            this.userRole = userRole;
+        }
+
+        public int getUserType() {
+            return userType;
+        }
+
+        public void setUserType(int userType) {
+            this.userType = userType;
         }
     }
 

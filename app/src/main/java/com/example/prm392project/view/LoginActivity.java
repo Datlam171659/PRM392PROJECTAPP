@@ -84,35 +84,70 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void onLoginSuccess(LoginResponse loginResponse) {
-        // Xử lý khi đăng nhập thành công
-        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-        Log.e("onLoginSuccess", "Login success" );
+        // Nhận thông tin cần thiết từ LoginResponse
+        String userId = loginResponse.getResult().getId();
+        String token = loginResponse.getToken();
+        Integer userRole = loginResponse.getResult().getUserRole();
+        Log.e("onLoginSuccess 91", "UserRole: " + userRole);
+        Intent intent = null;
 
-        // Check if loginResponse or its result is null
-        if (loginResponse == null || loginResponse.getResult() == null) {
-            Toast.makeText(this, "Login response is invalid", Toast.LENGTH_SHORT).show();
-            Log.e("onLoginSuccess", "Login response or result is null");
+        if (userRole == null) {
+            Toast.makeText(this, "User role is not defined", Toast.LENGTH_SHORT).show();
+            return;  // Dừng lại nếu userRole là null
+        }
+
+        // Kiểm tra userRole để điều hướng người dùng
+        if (userRole == 0) {
+            intent = new Intent(LoginActivity.this, AdminActivity.class);
+            Toast.makeText(this, "Welcome Admin", Toast.LENGTH_SHORT).show();
+        } else if (userRole == 2) {
+            intent = new Intent(LoginActivity.this, MenuActivity.class);
+            Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Unknown User Role", Toast.LENGTH_SHORT).show();
+            Log.e("onLoginSuccess 112", "Unknown User Role: " + userRole);
             return;
         }
 
-        // Chuyển sang màn hình chính hoặc lưu token
-        String userId = String.valueOf(loginResponse.getResult().getId());
-        String metricId = String.valueOf(loginResponse.getResult().getId());
-
-        // Check if HealthMetric is null
-        if (loginResponse.getResult().getHealthMetric() != null) {
-            metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getId());
-        } else {
-            Log.e("onLoginSuccess", "HealthMetric is null");
-        }
-
-        Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
+        // Truyền thêm thông tin vào Intent nếu cần
         intent.putExtra("USER_ID", userId);
-        intent.putExtra("METRIC_ID", metricId);
-        Log.e("onLoginSuccess", "User ID: " + userId + ", Metric ID: " + metricId);
+        intent.putExtra("TOKEN", token);
+
         startActivity(intent);
         finish();
     }
+
+
+//        // Xử lý khi đăng nhập thành công
+//        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+//        Log.e("onLoginSuccess", "Login success" );
+//
+//        // Check if loginResponse or its result is null
+//        if (loginResponse == null || loginResponse.getResult() == null) {
+//            Toast.makeText(this, "Login response is invalid", Toast.LENGTH_SHORT).show();
+//            Log.e("onLoginSuccess", "Login response or result is null");
+//            return;
+//        }
+//
+//        // Chuyển sang màn hình chính hoặc lưu token
+//        String userId = String.valueOf(loginResponse.getResult().getId());
+//        String metricId = String.valueOf(loginResponse.getResult().getId());
+//        String userRole = String.valueOf(loginResponse.getResult().getUserRole());
+//
+//        // Check if HealthMetric is null
+//        if (loginResponse.getResult().getHealthMetric() != null) {
+//            metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getId());
+//        } else {
+//            Log.e("onLoginSuccess", "HealthMetric is null");
+//        }
+//
+//        Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
+//        intent.putExtra("USER_ID", userId);
+//        intent.putExtra("METRIC_ID", metricId);
+//        Log.e("onLoginSuccess", "User ID: " + userId + ", UserRole: " + userRole);
+//        startActivity(intent);
+//        finish();
+//    }
 
     @Override
     public void onLoginFailure(String message) {
