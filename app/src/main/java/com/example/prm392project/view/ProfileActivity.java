@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,8 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
     private ProfileBinding binding;
     private ProfilePresenter presenter;
     private ImageView backIcon;
-
+    private TextView tvCuaHangCuaBan;
+    private String dietplanId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,16 +27,25 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView {
         setContentView(binding.getRoot());
 
         String userId = getIntent().getStringExtra("USER_ID");
-
+        dietplanId = getIntent().getStringExtra("DIET_ID");
         backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
             intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Truyền lại dietplanId
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         });
-
+        tvCuaHangCuaBan = findViewById(R.id.tvCuaHangCuaBan);
+        tvCuaHangCuaBan.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, FavoriteMenuActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("DIET_ID", dietplanId);  // Truyền dietplanId
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
         // Initialize Presenter with userId
         presenter = new ProfilePresenter(this, this, userId);
         presenter.loadUserProfile();

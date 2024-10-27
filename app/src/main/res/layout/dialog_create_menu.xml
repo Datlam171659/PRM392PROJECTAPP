@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- Input field for date assigned -->
+    <EditText
+        android:id="@+id/dateAssignedInput"
+        android:layout_width="25000dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Date Assigned" />
+
+    <!-- Input field for period -->
+    <EditText
+        android:id="@+id/periodInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Period"
+        android:minHeight="48dp" />
+</LinearLayout>

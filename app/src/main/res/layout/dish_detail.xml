@@ -144,27 +144,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:paddingTop="16dp">
-
-            <Button
-                android:id="@+id/saveForLaterButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Save for later"
-                android:backgroundTint="@color/black"
-                android:textColor="@android:color/white"
-                android:padding="12dp" />
-
-            <Button
-                android:id="@+id/buyButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add"
-                android:backgroundTint="@color/black"
-                android:textColor="@android:color/white"
-                android:padding="12dp"
-                android:layout_marginStart="8dp" />
         </LinearLayout>
 
     </LinearLayout>

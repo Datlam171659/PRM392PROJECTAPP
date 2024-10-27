@@ -65,18 +65,13 @@
             android:paddingTop="8dp"
             android:weightSum="3">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/addicon"
-                android:src="@drawable/icon_add"
-                android:contentDescription="Add Icon" />
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_share"
-                android:contentDescription="Share Icon" />
+                android:src="@drawable/ic_delete"
+                android:id="@+id/deleteicon"
+                android:contentDescription="Delete icon" />
 
             <ImageView
                 android:layout_width="24dp"

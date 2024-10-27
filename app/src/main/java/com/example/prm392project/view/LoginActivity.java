@@ -159,6 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void onLoginSuccess(LoginResponse loginResponse) {
+        // Nhận thông tin cần thiết từ LoginResponse
         String userId = loginResponse.getResult().getId();
         String token = loginResponse.getToken();
         Integer userRole = loginResponse.getResult().getUserRole();
@@ -182,7 +183,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             return;
         }
 
+        // Retrieve the dietPlanId if dietPlans is not empty
+        String dietplanId = null;
+        if (loginResponse.getResult().getDietPlans() != null && !loginResponse.getResult().getDietPlans().isEmpty()) {
+            dietplanId = loginResponse.getResult().getDietPlans().get(0).getId();
+        }
+
+        // Pass data to the next activity
         intent.putExtra("USER_ID", userId);
+        intent.putExtra("DIET_ID", dietplanId);  // Pass the dietPlanId
         intent.putExtra("TOKEN", token);
 
         startActivity(intent);

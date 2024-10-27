@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Header with a back button -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/headerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu Yêu Thích"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <!-- Create Favorite Menu Button, visible by default for adding a menu -->
+    <Button
+        android:id="@+id/createFavoriteMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Tạo Menu Yêu Thích"
+        android:visibility="visible" />
+
+    <!-- TextView when no favorite items exist -->
+    <TextView
+        android:id="@+id/noFavoriteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have no favorite menus, please create one!"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <!-- RecyclerView for the favorite menu, visible when items exist -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoriteMenuRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
+</LinearLayout>
