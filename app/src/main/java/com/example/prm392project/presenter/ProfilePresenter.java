@@ -2,6 +2,8 @@ package com.example.prm392project.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
 import com.example.prm392project.model.ProfileModel;
 import com.example.prm392project.model.UserResponse;
 import com.example.prm392project.view.ProfileView;
@@ -38,6 +40,7 @@ public class ProfilePresenter {
 
     public void handleLogout() {
         model.clearSession();
+        Log.d("ProfilePresenter", "Session cleared successfully.");
         Intent intent = new Intent((Context) view, WelcomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         ((Context) view).startActivity(intent);

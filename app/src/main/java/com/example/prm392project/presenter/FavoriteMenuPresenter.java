@@ -69,32 +69,29 @@ public class FavoriteMenuPresenter {
         Log.d("FavoriteMenuPresenter", "Creating menu with dateAssign: " + dietItem.getDateAssigned() +
                 ", period: " + dietItem.getPeriod());
 
-        menuService.createFavoriteMenu(dietItem).enqueue(new Callback<MenuItem>() {
+        menuService.createFavoriteMenu(dietItem).enqueue(new Callback<DietItem>() {
             @Override
-            public void onResponse(Call<MenuItem> call, Response<MenuItem> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<DietItem> call, Response<DietItem> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    DietItem menuItem = response.body();
+
+                    // Check if required fields are null
+                    if (menuItem.getUserId() == null || menuItem.getId() == null) {
+                        view.showError("Received incomplete data. Please try again.");
+                        return;
+                    }
+
+                    // Handle the successful response as usual
                     view.onMenuCreated();
-                    // Ghi log phản hồi thành công từ API
                     Log.d("FavoriteMenuPresenter", "Menu created successfully: " + response.body());
                 } else {
-                    String errorMessage = "Failed to create favorite menu: " + response.message();
-                    Log.d("FavoriteMenuPresenter", "Creating menu with dateAssign: " + dietItem.getDateAssigned() +
-                            ", period: " + dietItem.getPeriod() );
-                    if (response.errorBody() != null) {
-                        try {
-                            String errorBody = response.errorBody().string();
-                            errorMessage += "\nError details: " + errorBody;
-                            Log.e("FavoriteMenuPresenter", errorMessage);
-                        } catch (IOException e) {
-                            Log.e("FavoriteMenuPresenter", "Error reading error body", e);
-                        }
-                    }
-                    view.showError(errorMessage);
+                    handleApiError("Failed to create favorite menu", response);
                 }
             }
 
+
             @Override
-            public void onFailure(Call<MenuItem> call, Throwable t) {
+            public void onFailure(Call<DietItem> call, Throwable t) {
                 view.showError("Error: " + t.getMessage());
                 Log.e("FavoriteMenuPresenter", "API call failed: " + t.getMessage(), t);
             }

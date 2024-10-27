@@ -23,5 +23,5 @@ public interface MenuService {
     Call<FavoriteMenuResponse> getFavoriteMenu(@Path("userId") String userId);
 
     @POST("dietplan/add")
-    Call<MenuItem> createFavoriteMenu(@Body DietItem dietItem);
+    Call<DietItem> createFavoriteMenu(@Body DietItem dietItem);
 }
