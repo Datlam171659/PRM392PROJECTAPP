@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.prm392project.HealthDashboardActivity;
 import com.example.prm392project.R;
 import com.example.prm392project.Adapter.FavoriteMenuAdapter;
 import com.example.prm392project.api.ApiClient;
@@ -49,12 +50,17 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
 
         // Back button setup
         ImageView backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("USER_ID", userId);
-            intent.putExtra("DIET_PLAN_ID", dietPlanId);  // Pass dietPlanId back
-            setResult(RESULT_OK, intent);
-            finish();
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go back to MenuListActivity when the backIcon is clicked
+                Intent intent = new Intent(FavoriteMenuActivity.this, ProfileActivity.class);
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("DIET_PLAN_ID", dietPlanId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish(); // Close this activity
+            }
         });
 
         favoriteMenuRecycler.setLayoutManager(new LinearLayoutManager(this));

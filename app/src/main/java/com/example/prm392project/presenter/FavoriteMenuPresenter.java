@@ -3,9 +3,11 @@ package com.example.prm392project.presenter;
 import android.util.Log;
 import com.example.prm392project.api.MenuService;
 import com.example.prm392project.model.DietItem;
+import com.example.prm392project.model.FavoriteMenuResponse;
 import com.example.prm392project.model.MenuItem;
 import com.example.prm392project.view.FavoriteMenuView;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,16 +24,31 @@ public class FavoriteMenuPresenter {
     }
 
     public void getFavoriteMenu(String userId) {
-        menuService.getFavoriteMenu(userId).enqueue(new Callback<List<DietItem>>() {
+        menuService.getFavoriteMenu(userId).enqueue(new Callback<FavoriteMenuResponse>() {
             @Override
-            public void onResponse(Call<List<DietItem>> call, Response<List<DietItem>> response) {
+            public void onResponse(Call<FavoriteMenuResponse> call, Response<FavoriteMenuResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<DietItem> favoriteMenuList = response.body();
-                    view.showNoFavorites("Sucessfull");
-                    if (favoriteMenuList.isEmpty()) {
+                    FavoriteMenuResponse favoriteResponse = response.body();
+
+                    // Add a null check for result
+                    if (favoriteResponse.getResult() == null) {
+                        view.showError("No result found in response");
+                        return;
+                    }
+
+                    FavoriteMenuResponse.Result result = favoriteResponse.getResult();
+
+                    // Proceed with populating DietItem only if result is not null
+                    DietItem dietItem = new DietItem(result.getUserId(), result.getDateAssigned(), result.getPeriod());
+                    dietItem.setId(result.getId());
+                    dietItem.setDeleted(result.isDeleted());
+                    dietItem.setStatus(result.getStatus());
+                    dietItem.setMenuDietPlans(result.getDietPlans());
+
+                    if (dietItem.getMenuDietPlans() == null || dietItem.getMenuDietPlans().isEmpty()) {
                         view.showNoFavorites("Please register a favorite menu.");
                     } else {
-                        view.showFavoriteMenu(favoriteMenuList);
+                        view.showFavoriteMenu(Collections.singletonList(dietItem));
                     }
                 } else {
                     handleApiError("Failed to load favorite menus", response);
@@ -39,11 +56,13 @@ public class FavoriteMenuPresenter {
             }
 
             @Override
-            public void onFailure(Call<List<DietItem>> call, Throwable throwable) {
+            public void onFailure(Call<FavoriteMenuResponse> call, Throwable throwable) {
                 logAndShowError("Failed to load favorite menus", throwable);
             }
         });
     }
+
+
 
     public void createFavoriteMenu(DietItem dietItem) {
         // Ghi log các giá trị của dateAssign và period trước khi gọi API
