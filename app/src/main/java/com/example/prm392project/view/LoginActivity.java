@@ -77,10 +77,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         biometricLoginButton.setOnClickListener(view -> {
             BiometricManager biometricManager = BiometricManager.from(this);
-            if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
+            int canAuthenticateResult = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL);
+
+            if (canAuthenticateResult == BiometricManager.BIOMETRIC_SUCCESS) {
                 showBiometricPrompt();
             } else {
-                Toast.makeText(this, "Biometric authentication not available", Toast.LENGTH_SHORT).show();
+                handleBiometricError(canAuthenticateResult);
             }
         });
     }
@@ -98,8 +100,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-                // Proceed with successful login action
-                navigateToDashboard();
+
+                // Tạo một LoginRequest với tài khoản đã định nghĩa
+                LoginRequest loginRequest = new LoginRequest("viet", "viet");
+                presenter.login(loginRequest);
             }
 
             @Override
@@ -111,11 +115,32 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Đăng nhập bằng sinh trắc học")
-                .setDescription("Dùng khuôn mặt của bạn để đăng nhập")
-                .setNegativeButtonText("Cancel")
+                .setDescription("Dùng khuôn mặt hoặc vân tay để đăng nhập")
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG |
+                        BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                 .build();
 
+
         biometricPrompt.authenticate(promptInfo);
+    }
+
+    private void handleBiometricError(int error) {
+        String errorMessage;
+        switch (error) {
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                errorMessage = "Thiết bị của bạn không hỗ trợ sinh trắc học.";
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                errorMessage = "Tính năng sinh trắc học hiện không khả dụng.";
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                errorMessage = "Vui lòng đăng ký sinh trắc học trong cài đặt thiết bị.";
+                break;
+            default:
+                errorMessage = "Sinh trắc học không khả dụng.";
+                break;
+        }
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void navigateToDashboard() {
@@ -126,18 +151,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showLoading() {
-        // Hiển thị trạng thái đang tải
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void hideLoading() {
-        // Ẩn trạng thái đang tải
-    }
+    public void hideLoading() {}
 
     @Override
     public void onLoginSuccess(LoginResponse loginResponse) {
-        // Nhận thông tin cần thiết từ LoginResponse
         String userId = loginResponse.getResult().getId();
         String token = loginResponse.getToken();
         Integer userRole = loginResponse.getResult().getUserRole();
@@ -146,10 +167,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         if (userRole == null) {
             Toast.makeText(this, "User role is not defined", Toast.LENGTH_SHORT).show();
-            return;  // Dừng lại nếu userRole là null
+            return;
         }
 
-        // Kiểm tra userRole để điều hướng người dùng
         if (userRole == 0) {
             intent = new Intent(LoginActivity.this, AdminActivity.class);
             Toast.makeText(this, "Welcome Admin", Toast.LENGTH_SHORT).show();
@@ -162,7 +182,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             return;
         }
 
-        // Truyền thêm thông tin vào Intent nếu cần
         intent.putExtra("USER_ID", userId);
         intent.putExtra("TOKEN", token);
 
@@ -170,45 +189,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         finish();
     }
 
-
-//        // Xử lý khi đăng nhập thành công
-//        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-//        Log.e("onLoginSuccess", "Login success" );
-//
-//        // Check if loginResponse or its result is null
-//        if (loginResponse == null || loginResponse.getResult() == null) {
-//            Toast.makeText(this, "Login response is invalid", Toast.LENGTH_SHORT).show();
-//            Log.e("onLoginSuccess", "Login response or result is null");
-//            return;
-//        }
-//
-//        // Chuyển sang màn hình chính hoặc lưu token
-//        String userId = String.valueOf(loginResponse.getResult().getId());
-//        String metricId = String.valueOf(loginResponse.getResult().getId());
-//        String userRole = String.valueOf(loginResponse.getResult().getUserRole());
-//
-//        // Check if HealthMetric is null
-//        if (loginResponse.getResult().getHealthMetric() != null) {
-//            metricId = String.valueOf(loginResponse.getResult().getHealthMetric().getId());
-//        } else {
-//            Log.e("onLoginSuccess", "HealthMetric is null");
-//        }
-//
-//        Intent intent = new Intent(LoginActivity.this, HealthDashboardActivity.class);
-//        intent.putExtra("USER_ID", userId);
-//        intent.putExtra("METRIC_ID", metricId);
-//        Log.e("onLoginSuccess", "User ID: " + userId + ", UserRole: " + userRole);
-//        startActivity(intent);
-//        finish();
-//    }
-
     @Override
     public void onLoginFailure(String message) {
-        // Xử lý khi đăng nhập thất bại
         Toast.makeText(this, "Login Failed: " + message, Toast.LENGTH_SHORT).show();
-        Log.e("onLoginFailure", "Login failed" );
+        Log.e("onLoginFailure", "Login failed");
         emailEditText.setText("");
         passwordEditText.setText("");
     }
-
 }
