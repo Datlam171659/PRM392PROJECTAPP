@@ -31,6 +31,8 @@ public class UpdateAccountActivity extends AppCompatActivity implements UpdateAc
 
         packageContainer = findViewById(R.id.packageContainer);
         Button createPaymentCodeButton = findViewById(R.id.createPaymentCodeButton);
+        Button backProfileButton = findViewById(R.id.backProfile); // Lấy nút quay lại
+
         presenter = new UpdateAccountPresenter(this);
 
         displayPackages(presenter.getPackages());
@@ -42,6 +44,13 @@ public class UpdateAccountActivity extends AppCompatActivity implements UpdateAc
             } else {
                 Toast.makeText(this, "Vui lòng chọn một gói trước khi thanh toán.", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        // Xử lý sự kiện click cho nút quay lại
+        backProfileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(UpdateAccountActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            finish(); // Kết thúc activity hiện tại
         });
     }
 
