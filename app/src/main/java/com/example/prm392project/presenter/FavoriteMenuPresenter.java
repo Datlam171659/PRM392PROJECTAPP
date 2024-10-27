@@ -54,7 +54,7 @@ public class FavoriteMenuPresenter {
                                     List<MenuItem> matchedMenus = new ArrayList<>();
                                     for (FavoriteMenuResponse.MenuDietPlan dietPlan : favoritePlans) {
                                         for (MenuItem menuItem : allMenus) {
-                                            if (menuItem.getId().equals(dietPlan.getMenuId())) {
+                                            if (menuItem.getId().equals(dietPlan.getMenuId())&& !dietPlan.isDeleted()) {
                                                 matchedMenus.add(menuItem);
                                                 Log.d(TAG, "Matched Menu ID: " + menuItem.getId() + ", Name: " + menuItem.getMenuName());
                                             }
