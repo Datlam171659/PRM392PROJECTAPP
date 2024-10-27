@@ -18,7 +18,6 @@ import com.example.prm392project.Adapter.FavoriteMenuAdapter;
 import com.example.prm392project.api.ApiClient;
 import com.example.prm392project.api.MenuService;
 import com.example.prm392project.model.DietItem;
-import com.example.prm392project.model.MenuItem;
 import com.example.prm392project.presenter.FavoriteMenuPresenter;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
     private Button createFavoriteMenuButton;
     private RecyclerView favoriteMenuRecycler;
     private String userId;
-
+    private String dietPlanId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,7 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
             return;
         }
 
-        MenuService menuService = ApiClient.getMenuService(); // Use the streamlined method
+        MenuService menuService = ApiClient.getMenuService();
         presenter = new FavoriteMenuPresenter(this, menuService);
 
         favoriteMenuRecycler = findViewById(R.id.favoriteMenuRecycler);
@@ -53,7 +52,8 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
         backIcon.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("USER_ID", userId);
-            setResult(RESULT_OK, intent); // Send userId back to the profile activity
+            intent.putExtra("DIET_PLAN_ID", dietPlanId);  // Pass dietPlanId back
+            setResult(RESULT_OK, intent);
             finish();
         });
 
@@ -89,8 +89,8 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
     }
 
     @Override
-    public void showFavoriteMenu(List<MenuItem> menuItems) {
-        adapter = new FavoriteMenuAdapter(menuItems);
+    public void showFavoriteMenu(List<DietItem> dietItems) {
+        adapter = new FavoriteMenuAdapter(dietItems);
         favoriteMenuRecycler.setAdapter(adapter);
         favoriteMenuRecycler.setVisibility(View.VISIBLE);
         createFavoriteMenuButton.setVisibility(View.GONE);
@@ -109,6 +109,10 @@ public class FavoriteMenuActivity extends AppCompatActivity implements FavoriteM
         presenter.getFavoriteMenu(userId);
     }
 
+    @Override
+    public void storeDietPlanId(String dietPlanId) {
+        this.dietPlanId = dietPlanId;
+    }
     @Override
     public void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

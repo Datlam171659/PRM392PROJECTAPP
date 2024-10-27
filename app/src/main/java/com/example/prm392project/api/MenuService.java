@@ -19,7 +19,7 @@ public interface MenuService {
     @GET("menu/get-all-by-dietitian-id/{id}")
     Call<MenuItem> getDishDetails(@Path("id") String dishId);
     @GET("dietplan/get-by-user-id/{userId}")
-    Call<List<MenuItem>> getFavoriteMenu(@Path("userId") String userId);
+    Call<List<DietItem>> getFavoriteMenu(@Path("userId") String userId);
 
     @POST("dietplan/add")
     Call<MenuItem> createFavoriteMenu(@Body DietItem dietItem);

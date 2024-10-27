@@ -10,14 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392project.R;
+import com.example.prm392project.model.DietItem;
 import com.example.prm392project.model.MenuItem;
 
 import java.util.List;
 
 public class FavoriteMenuAdapter extends RecyclerView.Adapter<FavoriteMenuAdapter.MenuViewHolder> {
-    private List<MenuItem> favoriteMenuItems;
+    private List<DietItem> favoriteMenuItems;
 
-    public FavoriteMenuAdapter(List<MenuItem> favoriteMenuItems) {
+    public FavoriteMenuAdapter(List<DietItem> favoriteMenuItems) {
         this.favoriteMenuItems = favoriteMenuItems;
     }
 
@@ -30,9 +31,21 @@ public class FavoriteMenuAdapter extends RecyclerView.Adapter<FavoriteMenuAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        MenuItem menuItem = favoriteMenuItems.get(position);
-        holder.menuName.setText(menuItem.getName());
+        DietItem dietItem = favoriteMenuItems.get(position);
+        List<MenuItem> menuDietPlans = dietItem.getMenuDietPlans();
+
+        // Convert the List of MenuItem to a single string to display
+        StringBuilder menuNames = new StringBuilder();
+        for (MenuItem item : menuDietPlans) {
+            if (menuNames.length() > 0) {
+                menuNames.append(", "); // Add a comma for separation
+            }
+            menuNames.append(item.getName()); // Assuming MenuItem has a getName() method
+        }
+
+        holder.menuName.setText(menuNames.toString());
     }
+
 
     @Override
     public int getItemCount() {

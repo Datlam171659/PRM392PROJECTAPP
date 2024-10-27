@@ -1,5 +1,6 @@
-// DietItem.java
 package com.example.prm392project.model;
+
+import java.util.List;
 
 public class DietItem {
     private String id;
@@ -7,13 +8,14 @@ public class DietItem {
     private String createdDate;
     private String lastUpdatedBy;
     private String lastUpdatedDate;
-    private boolean isDeleted = false; // Default to false for a new item
+    private boolean isDeleted;
     private String userId;
     private String dateAssigned;
     private String period;
-    private int status = 1; // Default status (e.g., active)
+    private int status;
+    private List<MenuItem> menuDietPlans; // Add a list to store associated menu diet plans
 
-    // Constructor for initializing userId, dateAssigned, and period
+    // Constructor for initializing necessary fields
     public DietItem(String userId, String dateAssigned, String period) {
         this.userId = userId;
         this.dateAssigned = dateAssigned;
@@ -99,5 +101,13 @@ public class DietItem {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<MenuItem> getMenuDietPlans() {
+        return menuDietPlans;
+    }
+
+    public void setMenuDietPlans(List<MenuItem> menuDietPlans) {
+        this.menuDietPlans = menuDietPlans;
     }
 }
